@@ -1,5 +1,4 @@
 # Proyectos_DAW
 
 ## Descripción 
-
-### Prueba
+#### Este repositorio es para subir todos los proyectos o trabajos creados por mi en el curso de 2ºDAW

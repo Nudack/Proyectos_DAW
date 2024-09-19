@@ -1,0 +1,41 @@
+body{
+    background-color: bisque;
+}
+
+#contenedor{
+    background-color: blueviolet;
+    height: 80%;
+    width: 80%;
+    margin: auto;
+    position: fixed;
+}
+
+#encabezado{
+    background-color: brown;
+    height: 100px;
+    width: 500px;
+    position: relative;
+}
+
+#navegacion{
+    background-color: green;
+    float: left;
+    height: 300px;
+    width: 100px;
+    position: relative;
+}
+
+#contenido{
+    background-color: darkgoldenrod;
+    float: right;
+    height: 300px;
+    width: 375px;
+    position: relative;
+}
+
+#pie{
+    background-color: blue;
+    height: 50px;
+    width: 60px;
+    position: relative;
+}

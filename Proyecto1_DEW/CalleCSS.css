@@ -1,19 +1,16 @@
-#div1 {
-    background-color: aqua;
+div {
+    display: block;
+    height: 200px;
+    width: 100%;
+    margin: 10px;
 }
 
-#div2 {
-    background-color: burlywood;
+p{
+    font-size: xx-large;
+    margin: 10px;
 }
 
-#div3 {
-    background-color: mediumpurple;
-}
-
-#div4 {
-    background-color: darkseagreen;
-}
-
-#div5 {
-    background-color: rosybrown;
+.max{
+    float: left;
+    max-height: 100%;
 }

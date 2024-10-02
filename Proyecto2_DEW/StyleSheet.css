@@ -1,12 +1,12 @@
 .container{
     display: flex;
     margin: 50px;
-}
-
-.avion{
-    flex: 1;
     justify-content: center;
     text-align: center;
+}
+
+.aviones{
+    flex: 1;
     border: 1px;
     border-color: black;
 }
@@ -21,4 +21,29 @@
 
 #amarillo{
     background-color: yellow;
+}
+
+.avion{
+    width: 1500px;
+    height: 225px;
+    background: royalblue;
+    border-radius: 20%;
+}
+
+.tabla{
+    border-spacing: 12px 5px;
+}
+
+.asiento{
+    width: 25px;
+    height: 25px;
+    border-color: grey;
+}
+
+#libre{
+    background-color: green;
+}
+
+#ocupado{
+    background-color: red;
 }

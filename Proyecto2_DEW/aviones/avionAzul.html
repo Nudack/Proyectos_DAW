@@ -7,5 +7,18 @@
     <title>Avión Azul</title>
 </head>
 <body>
+    <h1>Reserva de Asientos - Avión Azul</h1>
+
+    <label for="categoria">Selecciona tu categoría:</label>
+    <select id="categoria" onchange="mostrarAsientos()">
+        <option value="business">Business</option>
+        <option value="economica">Económica</option>
+        <option value="lowCost">Low-Cost</option>
+    </select>
+
+    <div id="tablaAsientos"></div>
+    <div id="complementos"></div>
+
+    <script src="../Script.js"></script>
 </body>
 </html>

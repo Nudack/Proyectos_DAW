@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../StyleSheet.css">
     <title>Avión Amarillo</title>
 </head>
 <body>
-    
+    <h1>Reserva de Asientos - Avión Amarillo</h1>
+
+    <label for="categoria">Selecciona tu categoría:</label>
+    <select id="categoria" onchange="mostrarAsientos()">
+        <option value="business">Business</option>
+        <option value="economica">Económica</option>
+        <option value="lowCost">Low-Cost</option>
+    </select>
+
+    <div id="tablaAsientos"></div>
+    <div id="complementos"></div>
+
+    <script src="../Script.js"></script>
 </body>
 </html>

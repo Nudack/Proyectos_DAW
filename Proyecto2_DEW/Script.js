@@ -13,15 +13,21 @@ class Avion {
             this.asientos[fila][columna] = false; // Marcar como ocupado
         }
     }
+
+    liberarAsiento(fila, columna) {
+        if (!this.asientos[fila][columna]){
+            this.asientos[fila][columna] = true;
+        }
+    }
 }
 
 // Definir los aviones
-const avionBlanco = new Avion('Avión Blanco', 6, 4, { business: 200, economica: 125, lowCost: 50 });
-const avionAzul = new Avion('Avión Azul', 8, 6, { business: 250, economica: 175, lowCost: 60 });
-const avionAmarillo = new Avion('Avión Amarillo', 10, 8, { business: 300, economica: 200, lowCost: 70 });
+const avionBlanco = new Avion('Avión Blanco', 10, 4, { business: 300, economica: 200, lowCost: 70 });
+const avionAzul = new Avion('Avión Azul', 18, 6, { business: 250, economica: 175, lowCost: 60 });
+const avionAmarillo = new Avion('Avión Amarillo', 24, 6, { business: 200, economica: 125, lowCost: 50 });
 
 // Función para generar asientos aleatoriamente ocupados o libres
-function generarAsientosAleatorios(filas, columnas, probabilidadOcupado = 0.3) {
+function generarAsientosAleatorios(filas, columnas, probabilidadOcupado = 0.45) {
     return Array.from({ length: filas }, () =>
         Array.from({ length: columnas }, () => Math.random() < probabilidadOcupado ? false : true)
     );
@@ -58,11 +64,15 @@ function reservar(fila, columna) {
 
     if (avion.asientos[fila][columna]) {
         // Reservar asiento
-        avion.reservarAsiento(fila, columna);
-        alert(`Has reservado el asiento en fila ${fila + 1}, columna ${columna + 1} en categoría ${categoria}.`);
-        
-        // Mostrar el formulario final con los complementos
-        mostrarFormularioFinal(categoria, fila, columna);
+        if(confirm(`¿Quieres reservar el asiento en fila ${fila + 1}, columna ${columna + 1} en categoría ${categoria}.?`)){
+            avion.reservarAsiento(fila, columna);
+            mostrarFormularioFinal(categoria, fila, columna);
+        }
+        else{
+            avion.liberarAsiento(fila, columna)
+            mostrarFormularioFinal(categoria, fila, columna);
+        }
+
     } else {
         alert('Este asiento ya está ocupado.');
     }
@@ -101,22 +111,22 @@ function mostrarFormularioFinal(categoria, fila, columna) {
     `;
 
     // Complementos según la categoría
-    if (categoria === "business") {
+    if (categoria == "lowCost") {
         formularioHtml += `
-            <label><input type="checkbox" id="asiento" disabled checked> Elección de asiento gratuita (Fila ${fila + 1}, Columna ${columna + 1})</label><br>
+            <label></label><input type="checkbox" id="asiento" disabled checked> Pagar por elección de asiento (Fila ${fila + 1}, Columna ${columna + 1}, +5€)<br>
             <label><input type="checkbox" id="maleta10kg"> Maleta de 10Kg (+30€)</label><br>
             <label><input type="checkbox" id="maleta25kg"> Maleta de 25Kg (+45€)</label><br>
             <label><input type="checkbox" id="embarque"> Embarque prioritario (+10€)</label><br>
             <label><input type="checkbox" id="menu"> Menú a bordo (+20€)</label><br>
         `;
-    } else if (categoria === "economica") {
+    } else if (categoria == "economica") {
         formularioHtml += `
             <label><input type="checkbox" id="asiento"> Pagar por elección de asiento (Fila ${fila + 1}, Columna ${columna + 1}, +5€)</label><br>
             <label><input type="checkbox" id="maleta25kg"> Maleta de 25Kg (+45€)</label><br>
             <label><input type="checkbox" id="menu"> Menú a bordo (+20€)</label><br>
         `;
-    } else if (categoria === "low-cost") {
+    } else if (categoria == "business") {
         formularioHtml += `
-            <label><input type="checkbox" id="asiento"> Pagar por elección de asiento (Fila ${fila + 1}, Columna ${columna + 1}, +5€)</`
+            <label><input type="checkbox" id="asiento"> Elección de asiento (Fila ${fila + 1}, Columna ${columna + 1})</`
     }
 }

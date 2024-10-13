@@ -9,6 +9,7 @@
 <body>
     <h1>Reserva de Asientos - Avión Azul</h1>
 
+    <!-- Selección de categoría -->
     <label for="categoria">Selecciona tu categoría:</label>
     <select id="categoria" onchange="mostrarAsientos()">
         <option value="business">Business</option>
@@ -16,8 +17,22 @@
         <option value="lowCost">Low-Cost</option>
     </select>
 
+    <!-- Tabla de asientos -->
     <div id="tablaAsientos"></div>
-    <div id="complementos"></div>
+
+    <!-- Complementos (que se mostrarán dinámicamente según la categoría seleccionada) -->
+    <div id="complementos">
+        <!-- Estos complementos serán generados dinámicamente -->
+    </div>
+
+    <!-- Selección de si es residente -->
+    <div>
+        <label for="residente">¿Eres residente? (75% de descuento)</label>
+        <input type="checkbox" id="residente" onchange="actualizarPrecio()">
+    </div>
+
+    <!-- Mostrar el precio total -->
+    <div id="precioTotal">Precio total: 0€</div>
 
     <script src="../Script.js"></script>
 </body>

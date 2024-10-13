@@ -77,6 +77,14 @@ td:hover {
     background-color: #dc3545; /* Ocupado */
 }
 
+#azul {
+    background-color:#0056b3;
+}
+
+#amarillo {
+    background-color:yellow;
+}
+
 /* Formulario de complementos */
 #complementos {
     margin: 20px;

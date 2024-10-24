@@ -13,7 +13,7 @@ let size = 6
 let discs
 
 //tiempo de sleep y velocidad
-const sleetTime = 300
+const sleepTime = 300
 let speed = 100
 
 //colores de los discos
@@ -98,5 +98,101 @@ function dragover(){
 
 //event handler for dragstart
 function dragstart() {
-    
+    this.classList.add('is-dragging')
 }
+
+//mover la torre desde el origen al la torre actual
+function moveTower(originTowerIndex, currentTowerIndex, disc){
+    if(isDroppable(originTowerIndex, currentTowerIndex, disc)) {
+        towerContent[currentTowerIndex].push(towerContento[originTowerIndex].pop())
+        originTower.removeChild(disc)
+        currentTower.prepend(disc)
+    }
+}
+
+//provar si el disco puede mover de posición
+function isDroppable(originTowerIndex, currentTowerIndex, disc){
+    let top = isOnTop(originTowerIndex, disc)
+    let topDiscIsLess = isDiscLessThan(currentTowerIndex, disc)
+
+    return top && topDiscIsLess
+}
+
+//comprobar que el disco de arriba esta en la torre de origen
+function isOnTop(originTowerIndex, disc) {
+    let size = towerContent[originTowerIndex].length
+    return disc.style.width === towerContent[originTowerIndex][size - 1].style.width
+}
+
+//comprobar si el disco es mas pequeño que el disco en la torre actual
+function isDiscLessThan(currentTowerIndex, disc) {
+    size = towerContent[currentTowerIndex].length
+
+    if (!towerContent[currentTowerIndex][size -1] ){
+        return true
+    }
+    else{
+        let sizeTop = disc.style.width.substring(0, disc.style.width.indexOf('p'))
+        return Number(sizeTop) < Number(sizeBottom)
+    }
+}
+
+
+//mover el disco de arriba del origen al de destino
+function moveTopDisc(originTowerIndex, destinyTowerIndex){
+    originTower = towers[originTowerIndex]
+    currentTower = towers[destinyTowerIndex]
+    let disc = getTopDisc(originTowerIndex)
+    moveTower(originTowerIndex, destinyTowerIndex, disc)
+}
+
+//recoger el disco de arriba de una torre en concreto
+function getTopDisc(towerIndex){
+    let size = towerContent(towerContent).length
+
+    let sizeDisc = towerContent[towerIndex][size -1].style.width
+    let indexDisc = -1
+    discs.forEach((el, index) =>{
+        if(el.style.width === sizeDisc){
+            indexDisc = index
+        }
+    })
+    return discs[indexDisc]
+}
+
+
+//animar lso movimientos de la solución
+async function moves(movements) {
+    for (let i = 0; i < movements.length; i++){
+        const element = movements[i];
+        moveTopDisc(element.origin, element.destiny)
+        await sleep(5 * sleepTime - 14 * speed)
+    }
+}
+
+//clase Game
+class Game {
+    //metodo para empezar un nuevo game
+    newGame = () => {
+        //Event listner por la velocidad del rango input
+        speedRange.addEventListener('input', event => {
+            speed = event.target.value
+        })
+
+        //Event listner por el click en el boton de new game
+        newGameBtn.addEventListener('click', () => {
+            size = discSelect.selectedIndex + 1
+            start()
+        })
+
+        //Event listener para el boton de resolver
+        btnSolve.onclick = function() {
+            const movements = getHanoiSolutions(size)
+            moves(movements)
+        }
+
+    }
+}
+
+
+export default Game

@@ -9,7 +9,7 @@
         private const SERVIDOR = 'localhost';
         private const USUARIO  = 'patricio';
         private const PASSWORD = 'Sav6934';
-        private const BBDD     = 'biblioteca';
+        private const BBDD     = 'gestion';
 
 
         private function __construct()

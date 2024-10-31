@@ -4,9 +4,9 @@
     {
 
 
-        public function __construct($name,$opciones,$opt=[])
+        public function __construct($nombre,$opciones,$opt=[])
         {
-            parent::__construct($name,$opt);
+            parent::__construct($nombre,$opt);
 
             $this->options = $opciones;
 
@@ -25,8 +25,8 @@
 
 
             return "
-                <label class=\"". $this->error['class_error'] ." form-label\" for=\"{$this->name}\">{$this->lit[$this->name]}:</label>
-                <select {$this->pre_disabled}  class=\"form-control form-select\"  id=\"id{$this->name}\" name=\"{$this->name}\"> 
+                <label class=\"". $this->error['class_error'] ." form-label\" for=\"{$this->nombre}\">{$this->lit[$this->nombre]}:</label>
+                <select {$this->pre_disabled}  class=\"form-control form-select\"  id=\"id{$this->nombre}\" name=\"{$this->nombre}\"> 
                     {$html_options}
                 </select>
                 <br />

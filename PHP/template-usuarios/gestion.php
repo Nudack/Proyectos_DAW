@@ -10,8 +10,6 @@
 
     echo Plantilla::header();
 
-    define('EDITORIALES', ['AY' => 'Anaya', 'ST' => 'Santillana']);
-
     define('LIMITE_SCROLL', '5');
 
     $html_salida = '';

@@ -23,7 +23,7 @@
 
         public function cargar($elemento)
         {
-            $this->elementos[$elemento->name] = $elemento;
+            $this->elementos[$elemento->nombre] = $elemento;
         }
 
         public function activeDisable()
@@ -52,9 +52,9 @@
 
             foreach($this->elementos as $ind => $elemento)
             {
-                $this->errores[$elemento->name] = $elemento->validar();
+                $this->errores[$elemento->nombre] = $elemento->validar();
 
-                if($this->errores[$elemento->name]['error'])
+                if($this->errores[$elemento->nombre]['error'])
                     $this->cantidad_errores++;
 
             }

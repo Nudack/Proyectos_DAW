@@ -1,1 +1,0 @@
-# zonzamas.lan

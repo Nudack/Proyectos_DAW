@@ -1,11 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arbol de Productos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Categorías y Productos</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
+  <div class="container">
+    <!-- Columna Izquierda: Listado de Elementos -->
+    <div class="left-column">
+      <h2>Listado de Categorías y Productos</h2>
+
+      <!-- Formulario para Añadir Nuevos Elementos -->
+      <form id="add-form">
+        <label for="item-name">Añadir Elemento:</label>
+        <input type="text" id="item-name" placeholder="Nombre del nuevo elemento">
+        <button type="submit">Añadir</button>
+      </form>
+      <ul id="root-category" class="category-list">
+        <!-- Categoría raíz inicial -->
+        <li>
+          <span class="name">Categoría Raíz</span>
+          <button class="add-btn">+</button>
+          <ul class="subcategories"></ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Columna Derecha: Formularios de Búsqueda y Adición -->
+    <div class="right-column">
+      <h2>Buscar y Añadir Elementos</h2>
+      
+      <!-- Formulario de Búsqueda -->
+      <form id="search-form">
+        <label for="search-bar">Buscar:</label>
+        <input type="text" id="search-bar" placeholder="Escribe para buscar...">
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
+

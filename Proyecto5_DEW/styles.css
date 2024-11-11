@@ -49,3 +49,7 @@ body {
 .toggle-view {
   margin-right: 5px;
 }
+
+.hidden {
+  display: none;
+}

@@ -9,15 +9,15 @@ const rootCategory = document.getElementById('root-category');
 addForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const itemName = itemNameInput.value.trim();
-  if (itemName) addItem(itemName);
+  if (itemName) addItem(itemName, rootCategory);
   itemNameInput.value = '';
 });
 
 // FUNCIÓN PARA AÑADIR ELEMENTO
-function addItem(name) {
-  const selectedParent = rootCategory.querySelector('ul.subcategories');
+function addItem(name, parent) {
+  const selectedParent = parent.querySelector('ul.subcategories') || parent;
   if (!itemExists(selectedParent, name)) {
-    createListItem(selectedParent, name, false);
+    createListItem(selectedParent, name);
   } else {
     alert('Elemento ya existe.');
   }
@@ -31,11 +31,11 @@ function itemExists(parent, name) {
 }
 
 // CREAR NUEVO ELEMENTO LI PARA SUBCATEGORÍA O PRODUCTO
-function createListItem(parent, name, isProduct = false) {
+function createListItem(parent, name) {
   const li = document.createElement('li');
   const nameSpan = document.createElement('span');
   nameSpan.textContent = name;
-  nameSpan.classList.add(isProduct ? 'product-name' : 'subcategory-name', 'name');
+  nameSpan.classList.add('name');
 
   // Checkbox para mostrar/ocultar subcategorías
   const toggleCheckbox = document.createElement('input');
@@ -47,7 +47,7 @@ function createListItem(parent, name, isProduct = false) {
   const addButton = document.createElement('button');
   addButton.textContent = '+';
   addButton.classList.add('add-btn');
-  addButton.addEventListener('click', () => addItemPrompt(li.querySelector('.subcategories')));
+  addButton.addEventListener('click', () => addItemPrompt(li.querySelector('.subcategories') || li));
 
   // Botón para eliminar subcategoría/producto
   const deleteButton = document.createElement('button');
@@ -58,7 +58,7 @@ function createListItem(parent, name, isProduct = false) {
   li.appendChild(deleteButton);
   li.appendChild(toggleCheckbox);
   li.appendChild(nameSpan);
-  if (!isProduct) li.appendChild(addButton);
+  li.appendChild(addButton);
 
   const subcategoryList = document.createElement('ul');
   subcategoryList.classList.add('subcategories');
@@ -76,9 +76,8 @@ function createListItem(parent, name, isProduct = false) {
 function addItemPrompt(parent) {
   const name = prompt('Ingrese nombre:');
   if (name) {
-    const isProduct = parent.classList.contains('subcategories');
     if (!itemExists(parent, name)) {
-      createListItem(parent, name, isProduct);
+      createListItem(parent, name);
     } else {
       alert('Elemento ya existe.');
     }
@@ -91,7 +90,7 @@ function deleteItem(li) {
   if (subcategories && subcategories.children.length > 0) {
     alert('No se puede eliminar una categoría/subcategoría con contenido.');
   } else {
-    li.style.display = 'none';
+    li.remove();
   }
 }
 
@@ -105,7 +104,14 @@ searchForm.addEventListener('input', () => {
 function filterItems(parent, searchTerm) {
   Array.from(parent.querySelectorAll('li')).forEach((li) => {
     const name = li.querySelector('.name').textContent.toLowerCase();
-    li.style.display = name.includes(searchTerm) ? 'block' : 'none';
+    const isMatch = name.includes(searchTerm);
+    
+    li.style.display = isMatch ? 'block' : 'none';
+    
+    const subcategories = li.querySelector('.subcategories');
+    if (subcategories) {
+      subcategories.style.display = subcategories.children.length > 0 && isMatch ? 'block' : 'none';
+    }
   });
 }
 
@@ -125,4 +131,3 @@ function autocompleteSearch() {
   );
   if (matches.length === 1) searchBar.value = matches[0].textContent;
 }
-

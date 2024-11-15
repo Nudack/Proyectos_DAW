@@ -1,0 +1,86 @@
+personas
+    id PK
+    nombre
+    apellido_1
+    apellido_2
+    nif
+    email
+    --datos auditoría
+    ip_alta         
+    fecha_alta      
+    ip_ult_mod      
+    fecha_ult_mod   
+
+
+alumnos
+    id PK
+    id_persona FK
+
+
+profesores
+    id PK
+    id_persona FK
+    id_ciclo_tutor FK
+
+
+modulos
+    id PK
+    nombre
+    id_profesor FK
+    color --#FF
+    siglas --CHAR(3)
+    --datos auditoría
+    ip_alta         
+    fecha_alta      
+    ip_ult_mod      
+    fecha_ult_mod   
+
+horario
+    id PK
+    id_modulo FK
+    dia -- L,M,X,J,V,S,D
+    hora_desde
+    hora_hasta
+
+    --datos auditoría
+    ip_alta         
+    fecha_alta      
+    ip_ult_mod      
+    fecha_ult_mod   
+
+
+--opcional, pero no para crear el horario sino para saber qué modulos tiene cada alumno. 
+modulos_alumnos
+    id PK
+    id_modulo FK
+    id_alumno FK
+
+    --datos auditoría
+    ip_alta         
+    fecha_alta      
+    ip_ult_mod      
+    fecha_ult_mod   
+
+
+ciclos
+    id PK
+    nombre --nombre del ciclo
+    siglas 
+    curso -- 1,2, o 3 
+    letra 
+
+    --datos auditoría
+    ip_alta         
+    fecha_alta      
+    ip_ult_mod      
+    fecha_ult_mod   
+
+ciclos_modulos
+    id PK
+    id_ciclo FK
+    id_modulo FK
+    --datos auditoría
+    ip_alta         
+    fecha_alta      
+    ip_ult_mod      
+    fecha_ult_mod    

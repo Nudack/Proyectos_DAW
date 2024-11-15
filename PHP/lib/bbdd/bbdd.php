@@ -1,5 +1,4 @@
 <?php
-
     class BBDD
     {
         //instancia única
@@ -11,7 +10,6 @@
         private const PASSWORD = 'Sav6934';
         private const BBDD     = 'biblioteca';
 
-
         private function __construct()
         {      
             $this->conexion = new mysqli(self::SERVIDOR, self::USUARIO, self::PASSWORD, self::BBDD);
@@ -20,17 +18,14 @@
             {
                 die("Conexión fallida: " . $this->conexion->connect_error);
             }
-        
         }
 
         static public function getInstance()
         {
-
             if (empty(self::$instance))
             {
                 self::$instance = new self();
             }
-
             return self::$instance;
         }
 
@@ -39,11 +34,9 @@
             self::$instance->conexion->close();
         }
 
-
         static public function query($query)
         {
             self::getInstance();
-
             return self::$instance->conexion->query($query);
         }
     }

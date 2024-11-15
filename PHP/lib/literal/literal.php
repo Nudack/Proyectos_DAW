@@ -10,14 +10,18 @@
             {
                 case 'ES':
                     $this->lit = [
-                        'nombre'        => 'Nombre'
-                       ,'email'         => 'Email'
-                       ,'edad'          => 'Edad'
-                       ,'enviar'        => 'Enviar'
-                       ,'error_gen'     => 'El campo es inválido'
+                        'nombre'      => 'Nombre'
+                       ,'descripcion' => 'Descripción'
+                       ,'autor'       => 'Autor'
+                       ,'editorial'   => 'Editorial'
+                       ,'enviar'      => 'Enviar'
+                       ,'error_gen'   => 'El campo es inválido'
+                       ,'nuevo'       => 'Nuevo'
+                       ,'editar'      => 'Editar'
                     ];
                 break;
             }
+
         }
 
         static public function getInstance()

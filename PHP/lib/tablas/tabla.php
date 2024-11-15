@@ -69,9 +69,9 @@ abstract class Tabla
             ;
         ";
 
-        $resultado = BBDD::query($sql);
-        $sql = "SELECT LAST_INSERT_ID() AS id; ";
-        $resultado = BBDD::query($sql);
+        $resultado  = BBDD::query($sql);
+        $sql        = "SELECT LAST_INSERT_ID() AS id; ";
+        $resultado  = BBDD::query($sql);
 
         if ($resultado->num_rows > 0) 
         {

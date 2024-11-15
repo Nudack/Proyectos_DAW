@@ -1,15 +1,9 @@
 <?php
-
-
-
     class Textarea extends Elemento
     {
-
         public function pintar()
         {
             $this->previo_pintar();
-
-
 
             return "
                 <label class=\"". $this->error['class_error'] ." form-label\" for=\"{$this->name}\">{$this->lit[$this->name]}:</label>
@@ -18,6 +12,4 @@
                 <br />
             ";
         }
-
-
     }

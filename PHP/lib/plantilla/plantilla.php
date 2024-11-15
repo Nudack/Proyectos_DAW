@@ -1,7 +1,13 @@
 <?php
 
 class Plantilla{
-    static function header(){
+    static function header($titulo, $opciones = array()){
+        $menu = '';
+        if (!$opciones['ocultar_menu'])
+        {
+            $menu = self::menu();
+        }
+
         return "
         <!DOCTYPE html>
         <html lang=\"en\">
@@ -23,7 +29,7 @@ class Plantilla{
             <meta property=\"og:type\" content=\"article\" />
 
             <!-- Website Title -->
-            <title>CRUD</title>
+            <title>{$titulo}</title>
             
             <!-- Styles -->
             <link href=\"https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,700,700i&display=swap\" rel=\"stylesheet\">
@@ -219,9 +225,34 @@ class Plantilla{
             <script src=\"assets/js/jquery.magnific-popup.js\"></script> <!-- Magnific Popup for lightboxes -->
             <script src=\"assets/js/validator.min.js\"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
             <script src=\"assets/js/scripts.js\"></script> <!-- Custom scripts -->
-            <script src=\"assets/js/efects.js\"></script>
+            <script src=\"js/efects.js\"></script>
         </body>
         </html>
         ";
+    }
+
+    static function cargarSeccion($seccion)
+    {
+        $titulo = 'CIFP Zonzamas';
+        if (!empty($seccion))
+            $titulo .= ' - '.ucfirst($seccion);
+
+        $salida = Plantilla::header($titulo);
+
+        switch($seccion)
+        {
+            case 'biblioteca':
+                $objeto_crud = new BibliotecaCRUD();
+            break;
+
+            default:
+                $objeto_crud = new IndexCRUD();                    
+            break;
+        }
+
+        $salida .= $objeto_crud->main();
+        $salida .= Plantilla::footer();
+
+        return $salida;
     }
 }

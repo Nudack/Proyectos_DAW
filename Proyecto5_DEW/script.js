@@ -5,32 +5,46 @@ const searchForm = document.getElementById('search-form');
 const searchBar = document.getElementById('search-bar');
 const rootCategory = document.getElementById('root-category');
 
-// FUNCIÓN PARA AÑADIR SUBCATEGORÍA O PRODUCTO
+// EVENTO PARA AÑADIR SUBCATEGORÍA O PRODUCTO DESDE EL FORMULARIO
 addForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const itemName = itemNameInput.value.trim();
-  if (itemName) addItem(itemName, rootCategory);
-  itemNameInput.value = '';
+  if (itemName) {
+    addItem(itemName, rootCategory);
+    itemNameInput.value = ''; // Limpiar campo
+  }
 });
 
-// FUNCIÓN PARA AÑADIR ELEMENTO
+// FUNCIÓN PARA AÑADIR NUEVO ELEMENTO
 function addItem(name, parent) {
   const selectedParent = parent.querySelector('ul.subcategories') || parent;
-  if (!itemExists(selectedParent, name)) {
+  if (!itemExistsInHierarchy(parent, name)) {
     createListItem(selectedParent, name);
   } else {
-    alert('Elemento ya existe.');
+    alert('Elemento ya existe en este nivel o en un nivel superior.');
   }
 }
 
-// COMPROBAR SI EL ELEMENTO YA EXISTE
+// COMPROBAR SI EL ELEMENTO YA EXISTE EN EL MISMO NIVEL O EN NIVELES SUPERIORES
+function itemExistsInHierarchy(parent, name) {
+  // Recorrer hacia arriba en el árbol para buscar duplicados
+  while (parent) {
+    if (itemExists(parent, name)) {
+      return true;
+    }
+    parent = parent.parentElement.closest('li'); // Ir al nivel superior
+  }
+  return false;
+}
+
+// COMPROBAR SI EL ELEMENTO YA EXISTE EN EL MISMO NIVEL
 function itemExists(parent, name) {
-  return Array.from(parent.children).some((child) => 
-    child.querySelector('.name').textContent === name
+  return Array.from(parent.querySelectorAll(':scope > ul > li')).some(child =>
+    child.querySelector('.name')?.textContent === name
   );
 }
 
-// CREAR NUEVO ELEMENTO LI PARA SUBCATEGORÍA O PRODUCTO
+// CREAR NUEVO ELEMENTO (CATEGORÍA O PRODUCTO)
 function createListItem(parent, name) {
   const li = document.createElement('li');
   const nameSpan = document.createElement('span');
@@ -43,13 +57,19 @@ function createListItem(parent, name) {
   toggleCheckbox.classList.add('toggle-view');
   toggleCheckbox.checked = true;
 
-  // Botón para añadir subcategoría/producto
+  // Botón para añadir subcategoría o producto
   const addButton = document.createElement('button');
   addButton.textContent = '+';
   addButton.classList.add('add-btn');
-  addButton.addEventListener('click', () => addItemPrompt(li.querySelector('.subcategories') || li));
+  addButton.addEventListener('click', () => {
+    const itemName = itemNameInput.value.trim();
+    if (itemName) {
+      addItem(itemName, li);
+      itemNameInput.value = ''; // Limpiar campo después de añadir
+    }
+  });
 
-  // Botón para eliminar subcategoría/producto
+  // Botón para eliminar elemento si es subcategoría o producto
   const deleteButton = document.createElement('button');
   deleteButton.textContent = 'X';
   deleteButton.classList.add('delete-btn');
@@ -72,18 +92,6 @@ function createListItem(parent, name) {
   parent.appendChild(li);
 }
 
-// PROMPT PARA AÑADIR NUEVO ELEMENTO
-function addItemPrompt(parent) {
-  const name = prompt('Ingrese nombre:');
-  if (name) {
-    if (!itemExists(parent, name)) {
-      createListItem(parent, name);
-    } else {
-      alert('Elemento ya existe.');
-    }
-  }
-}
-
 // ELIMINAR ELEMENTO SI NO TIENE HIJOS
 function deleteItem(li) {
   const subcategories = li.querySelector('ul.subcategories');
@@ -100,14 +108,14 @@ searchForm.addEventListener('input', () => {
   filterItems(rootCategory, searchTerm);
 });
 
-// FILTRAR ELEMENTOS EN BASE A TÉRMINO DE BÚSQUEDA
+// FUNCIÓN PARA FILTRAR ELEMENTOS
 function filterItems(parent, searchTerm) {
-  Array.from(parent.querySelectorAll('li')).forEach((li) => {
+  Array.from(parent.querySelectorAll('li')).forEach(li => {
     const name = li.querySelector('.name').textContent.toLowerCase();
     const isMatch = name.includes(searchTerm);
-    
+
     li.style.display = isMatch ? 'block' : 'none';
-    
+
     const subcategories = li.querySelector('.subcategories');
     if (subcategories) {
       subcategories.style.display = subcategories.children.length > 0 && isMatch ? 'block' : 'none';
@@ -115,7 +123,7 @@ function filterItems(parent, searchTerm) {
   });
 }
 
-// AUTOCOMPLETADO DE BÚSQUEDA
+// AUTOCOMPLETADO DE BÚSQUEDA CON TAB
 searchBar.addEventListener('keydown', (e) => {
   if (e.key === 'Tab') {
     e.preventDefault();
@@ -126,7 +134,7 @@ searchBar.addEventListener('keydown', (e) => {
 function autocompleteSearch() {
   const searchTerm = searchBar.value.toLowerCase();
   const allItems = rootCategory.querySelectorAll('.name');
-  const matches = Array.from(allItems).filter((item) =>
+  const matches = Array.from(allItems).filter(item =>
     item.textContent.toLowerCase().startsWith(searchTerm)
   );
   if (matches.length === 1) searchBar.value = matches[0].textContent;

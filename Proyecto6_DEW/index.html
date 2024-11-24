@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Keyboard</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Teclado Virtual</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="screen" contenteditable="false"></div>
-    <div id="keyboard"></div>
-    <script src="script.js"></script>
+    <div id="pantalla" aria-live="polite" role="textbox" aria-multiline="true"></div>
+    <div id="teclado" role="application" aria-label="Teclado virtual"></div>
+    <script src="scripts.js"></script>
 </body>
 </html>
+

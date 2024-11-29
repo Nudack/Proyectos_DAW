@@ -86,6 +86,11 @@ button:hover {
     cursor: pointer;
 }
 
+#navy{ background-color: #1a1f2c; }
+#light{ background-color: #ffffff; }
+#purple{ background-color: #4a0e4e; }
+
+
 .theme-navy { background-color: #1a1f2c; }
 .theme-light { background-color: #ffffff; }
 .theme-purple { background-color: #4a0e4e; }

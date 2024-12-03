@@ -1,81 +1,81 @@
 // Objeto con expresiones regulares y métodos de validación
 const validaciones = {
     nombre: {
-        regex: /^[A-Z][a-zA-Z]*$/,
+        regex: /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
         mensaje: "El nombre debe comenzar con mayúscula y contener solo letras."
     },
     apellidos: {
-        regex: /^[A-Z][a-zA-Z] + [A-Z][a-zA-Z]+$/,
+        regex: /^[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(\s[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)?$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
         mensaje: "Los apellidos deben ser dos, separados por un espacio y cada uno comenzando con mayúscula."
     },
     dni: {
-        regex: /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i,
+        regex: /^(?:(?:[XYZ][0-9]{7}[A-Z])|(?:[0-9]{8}[A-Z]))$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
         mensaje: "El DNI/NIE debe tener 8 números seguidos de una letra válida."
     },
     fechaNacimiento: {
-        regex: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[012])\/(19|20)\d\d$/,
+        regex: /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19[0-9]{2}|20[0-2][0-4])$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
         mensaje: "La fecha debe estar en formato DD/MM/AAAA."
     },
     codigoPostal: {
-        regex: /^(?:0[1-9]|[1-4]\d|5[0-2])\d{3}$/,
+        regex: /^[0-4][0-9]{4}|5[0-2][0-9]{3}$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
         mensaje: "El código postal debe ser un número de 5 dígitos válido en España."
     },
     email: {
-        regex: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+        regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
         mensaje: "Introduce un email válido."
     },
     telefonoFijo: {
-        regex: /^(\+34|0034|34)?\d{9}$/,
+        regex: /^9[0-9]{8}|8[0-9]{8}$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
-        mensaje: "Introduce un número de teléfono fijo español válido."
+        mensaje: "Introduce un número de teléfono fijo español válido.(Que empiece con 8 o 9)"
     },
     telefonoMovil: {
-        regex: /^(\+34|0034|34)?\d{9}$/,
+        regex: /^[67][0-9]{8}$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
-        mensaje: "Introduce un número de teléfono móvil español válido."
+        mensaje: "Introduce un número de teléfono móvil español válido.(Que empiece con 6 o 7)"
     },
     iban: {
-        regex: /^ES\d{2}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}\s?\d{4}$/,
+        regex: /^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
-        mensaje: "Introduce un IBAN español válido."
+        mensaje: "Introduce un IBAN español válido.(Dos letras iniciales, dos dígitos y entre 1 y 30 caracteres alfanuméricos.)"
     },
     tarjetaCredito: {
-        regex: /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$/,
+        regex: /^([0-9]{4}[- ]?){3}[0-9]{4}$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
-        mensaje: "Introduce un número de tarjeta de crédito válido."
+        mensaje: "Introduce un número de tarjeta de crédito válido.(Cuatro grupos de 4 dígitos separados por espacios o guiones opcionales.)"
     },
     password: {
-        regex: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{12,}$/,
+        regex: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z0-9!@#$%^&*]{12,}$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
-        mensaje: "La contraseña debe tener al menos 12 caracteres, incluyendo letras, números y un carácter especial."
+        mensaje: "La contraseña debe tener al menos 12 caracteres, una minúscula, una mayúscula, un número y un carácter especial."
     }
 };
 

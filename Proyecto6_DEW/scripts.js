@@ -1,6 +1,3 @@
-// El código JavaScript permanece igual que en la versión anterior
-// pero asegúrate de que el objeto Teclado y sus métodos estén incluidos aquí
-
 class Teclado {
     constructor(altGrKeys, shiftedKeys) {
         this.estado = {
@@ -9,7 +6,6 @@ class Teclado {
         };
         this.altGrKeys = altGrKeys;
         this.shiftedKeys = shiftedKeys;
-        // ... other properties ...
     }
 
     manejarTeclaPresionada(evento) {
@@ -93,7 +89,6 @@ class Teclado {
         this.actualizarPantalla();
     }
 
-    // ... other methods ...
     agregarCaracter(caracter) {
         //logica para agregar caracter
     }
@@ -109,16 +104,12 @@ class Teclado {
 const altGrKeys = {
     '1': '!',
     '2': '@',
-    // ... other altGr keys ...
 };
 
 const shiftedKeys = {
     'a': 'A',
     'b': 'B',
-    // ... other shifted keys ...
 };
 
 const teclado = new Teclado(altGrKeys, shiftedKeys);
-
-// Agregar event listeners para manejar eventos de teclado
 

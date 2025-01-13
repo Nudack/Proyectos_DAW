@@ -172,6 +172,107 @@ function recuperarDatos() {
     }
 }
 
+// Función para obtener datos desde un archivo JSON
+async function obtenerDesdeJson() {
+    try {
+        const resultado = await simularOperacionServidor('getJson');
+        const campos = document.querySelectorAll('input');
+        campos.forEach(campo => {
+            if (resultado[campo.id]) {
+                campo.value = resultado[campo.id];
+                validarCampo(campo);
+            }
+        });
+        alert('Datos obtenidos desde JSON correctamente');
+    } catch (error) {
+        console.error('Error al obtener datos desde JSON:', error);
+        alert('Error al obtener datos desde JSON');
+    }
+}
+
+// Función para publicar datos en PHP
+async function publicarEnPhp() {
+    if (validarFormulario()) {
+        try {
+            await simularOperacionServidor('postPhp', datosFormulario);
+            alert('Datos publicados en PHP correctamente');
+            limpiarFormulario();
+        } catch (error) {
+            console.error('Error al publicar en PHP:', error);
+            alert('Error al publicar en PHP');
+        }
+    } else {
+        alert('Por favor, corrige los errores en el formulario antes de publicar');
+    }
+}
+
+// Función para obtener datos desde PHP
+async function obtenerDesdePhp() {
+    try {
+        const resultado = await simularOperacionServidor('getPhp');
+        const campos = document.querySelectorAll('input');
+        campos.forEach(campo => {
+            if (resultado[campo.id]) {
+                campo.value = resultado[campo.id];
+                validarCampo(campo);
+            }
+        });
+        alert('Datos obtenidos desde PHP correctamente');
+    } catch (error) {
+        console.error('Error al obtener datos desde PHP:', error);
+        alert('Error al obtener datos desde PHP');
+    }
+}
+
+// Función para publicar datos en la base de datos
+async function publicarEnBaseDeDatos() {
+    if (validarFormulario()) {
+        try {
+            await simularOperacionServidor('postDb', datosFormulario);
+            alert('Datos publicados en la base de datos correctamente');
+            limpiarFormulario();
+        } catch (error) {
+            console.error('Error al publicar en la base de datos:', error);
+            alert('Error al publicar en la base de datos');
+        }
+    } else {
+        alert('Por favor, corrige los errores en el formulario antes de publicar');
+    }
+}
+
+// Función para obtener datos desde la base de datos
+async function obtenerDesdeBaseDeDatos() {
+    const dni = document.getElementById('dni').value;
+    if (validaciones.dni.test(dni)) {
+        try {
+            const resultado = await simularOperacionServidor('getDb', { dni });
+            const campos = document.querySelectorAll('input');
+            campos.forEach(campo => {
+                if (resultado[campo.id]) {
+                    campo.value = resultado[campo.id];
+                    validarCampo(campo);
+                }
+            });
+            alert('Datos obtenidos desde la base de datos correctamente');
+        } catch (error) {
+            console.error('Error al obtener datos desde la base de datos:', error);
+            alert('Error al obtener datos desde la base de datos');
+        }
+    } else {
+        alert('Por favor, introduce un DNI válido');
+    }
+}
+
+// Función para limpiar el formulario
+function limpiarFormulario() {
+    const campos = document.querySelectorAll('input');
+    campos.forEach(campo => {
+        campo.value = '';
+        campo.classList.remove('valid', 'invalid');
+        document.getElementById(`${campo.id}Error`).textContent = '';
+    });
+}
+
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
     const campos = document.querySelectorAll('input');
@@ -181,5 +282,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('guardarBtn').addEventListener('click', guardarDatos);
     document.getElementById('recuperarBtn').addEventListener('click', recuperarDatos);
+    document.getElementById('getJsonBtn').addEventListener('click', obtenerDesdeJson);
+    document.getElementById('postPhpBtn').addEventListener('click', publicarEnPhp);
+    document.getElementById('getPhpBtn').addEventListener('click', obtenerDesdePhp);
+    document.getElementById('postDbBtn').addEventListener('click', publicarEnBaseDeDatos);
+    document.getElementById('getDbBtn').addEventListener('click', obtenerDesdeBaseDeDatos);
 });
-

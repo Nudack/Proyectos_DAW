@@ -1,0 +1,30 @@
+img{
+    height: 40px;
+}
+
+#pantalla{
+    background-color: skyblue;
+    height: 100px;
+    width: 270px;
+}
+
+.tecla{
+    background-color: black;
+    color: white;
+    border-radius: 50%;
+    display: block;
+    height: 50px;
+    width: 50px;
+}
+
+.left{
+    float: left;
+}
+
+.valido{
+    color: green;
+}
+
+.invalido{
+    color: red;
+}

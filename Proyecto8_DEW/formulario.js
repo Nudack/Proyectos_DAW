@@ -57,11 +57,11 @@ const validaciones = {
         mensaje: "Introduce un número de teléfono móvil español válido.(Que empiece con 6 o 7)"
     },
     iban: {
-        regex: /^[A-Z]{2}[0-9]{20}$/,
+        regex: /^[A-Z]{2}[0-9]{22}$/,
         test: function(valor) {
             return this.regex.test(valor);
         },
-        mensaje: "Introduce un IBAN español válido.(Dos letras iniciales y 20 digitos.)"
+        mensaje: "Introduce un IBAN español válido.(Dos letras iniciales y 22 digitos.)"
     },
     tarjetaCredito: {
         regex: /^([0-9]{4}[- ]?){3}[0-9]{4}$/,
@@ -133,45 +133,6 @@ function validarFormulario() {
     return esValido;
 }
 
-// Función para guardar los datos
-function guardarDatos() {
-    if (validarFormulario()) {
-        const campos = document.querySelectorAll('input');
-        campos.forEach(campo => {
-            if (campo.id !== 'repeatPassword') {
-                datosFormulario[campo.id] = campo.value;
-            }
-        });
-        localStorage.setItem('datosFormulario', JSON.stringify(datosFormulario));
-        alert('Datos guardados correctamente');
-    } else {
-        alert('Por favor, corrige los errores en el formulario antes de guardar');
-    }
-}
-
-// Función para recuperar los datos
-function recuperarDatos() {
-    try {
-        const datosGuardados = localStorage.getItem('datosFormulario');
-        if (datosGuardados) {
-            datosFormulario = JSON.parse(datosGuardados);
-            const campos = document.querySelectorAll('input');
-            campos.forEach(campo => {
-                if (campo.id !== 'repeatPassword' && datosFormulario[campo.id]) {
-                    campo.value = datosFormulario[campo.id];
-                    validarCampo(campo);
-                }
-            });
-            alert('Datos recuperados correctamente');
-        } else {
-            alert('No hay datos guardados para recuperar');
-        }
-    } catch (error) {
-        console.error('Error al recuperar los datos:', error);
-        alert('Hubo un error al recuperar los datos');
-    }
-}
-
 // Función para obtener los datos del formulario como un objeto
 function getFormData() {
     const formData = {};
@@ -205,128 +166,115 @@ function clearFormData() {
     });
 }
 
-// Función para manejar errores de la API
-function handleApiError(error, operation) {
-    console.error(`Error en ${operation}:`, error);
-    alert(`Hubo un error al ${operation.toLowerCase()}. Por favor, intente nuevamente. Detalles: ${error.message}`);
-}
 
-// Función GET JSON
+// Función para obtener datos desde un archivo JSON
 async function getJson() {
     try {
-        const response = await fetch('data.json');
+        const response = await fetch('datos.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         setFormData(data);
-        alert('Datos obtenidos desde JSON correctamente');
     } catch (error) {
-        handleApiError(error, 'Obtener JSON');
+        console.error('Error al obtener datos JSON:', error);
+        alert('Error al obtener datos JSON');
     }
 }
 
-// Función POST PHP
+// Función para publicar datos en PHP
 async function postPhp() {
-    if (!validarFormulario()) {
-        alert('Por favor, corrija los errores en el formulario antes de enviar');
-        return;
-    }
-
-    const formData = getFormData();
-    try {
-        const response = await fetch('save.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
+    if (validarFormulario()) {
+        const formData = new FormData();
+        Object.entries(getFormData()).forEach(([key, value]) => {
+            formData.append(key, value);
         });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const result = await response.json();
-        if (result.success) {
-            alert('Datos enviados correctamente');
+
+        try {
+            const response = await fetch('post_php.php', {
+                method: 'POST',
+                body: formData
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+            alert(result.message);
             clearFormData();
-        } else {
-            throw new Error(result.message || 'Error desconocido al enviar los datos');
+        } catch (error) {
+            console.error('Error al publicar datos en PHP:', error);
+            alert('Error al publicar datos en PHP');
         }
-    } catch (error) {
-        handleApiError(error, 'Enviar a PHP');
+    } else {
+        alert('Por favor, corrige los errores en el formulario antes de enviar');
     }
 }
 
-// Función GET PHP
+// Función para obtener datos desde PHP
 async function getPhp() {
     try {
-        const response = await fetch('get_data.php');
+        const response = await fetch('post_php.php');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
         setFormData(data);
-        alert('Datos obtenidos desde PHP correctamente');
     } catch (error) {
-        handleApiError(error, 'Obtener de PHP');
+        console.error('Error al obtener datos de PHP:', error);
+        alert('Error al obtener datos de PHP');
     }
 }
 
-// Función POST Database
+// Función para publicar datos en la base de datos
 async function postDb() {
-    if (!validarFormulario()) {
-        alert('Por favor, corrija los errores en el formulario antes de enviar');
-        return;
-    }
-
-    const formData = getFormData();
-    try {
-        const response = await fetch('save_to_db.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
+    if (validarFormulario()) {
+        const formData = new FormData();
+        Object.entries(getFormData()).forEach(([key, value]) => {
+            formData.append(key, value);
         });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const result = await response.json();
-        if (result.success) {
-            alert('Datos guardados en la base de datos correctamente');
+
+        try {
+            const response = await fetch('post_db.php', {
+                method: 'POST',
+                body: formData
+            });
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const result = await response.json();
+            alert(result.message);
             clearFormData();
-        } else {
-            throw new Error(result.message || 'Error desconocido al guardar los datos');
+        } catch (error) {
+            console.error('Error al publicar datos en la base de datos:', error);
+            alert('Error al publicar datos en la base de datos');
         }
-    } catch (error) {
-        handleApiError(error, 'Guardar en Base de Datos');
+    } else {
+        alert('Por favor, corrige los errores en el formulario antes de enviar');
     }
 }
 
-// Función GET Database
+// Función para obtener datos desde la base de datos
 async function getDb() {
-    const dni = document.getElementById('dni').value;
+    const dni = document.getElementById('dniDB').value;
     if (!dni) {
-        alert('Por favor, ingrese un DNI para buscar en la base de datos');
+        alert('Por favor, ingrese un DNI para buscar');
         return;
     }
 
     try {
-        const response = await fetch(`get_from_db.php?dni=${encodeURIComponent(dni)}`);
+        const response = await fetch(`get_db.php?dni=${encodeURIComponent(dni)}`);
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        if (data && !data.error) {
-            setFormData(data);
-            alert('Datos obtenidos de la base de datos correctamente');
-        } else if (data && data.error) {
-            throw new Error(data.error);
+        if (data.error) {
+            alert(data.error);
         } else {
-            alert('No se encontraron datos para el DNI proporcionado');
+            setFormData(data);
         }
     } catch (error) {
-        handleApiError(error, 'Obtener de Base de Datos');
+        console.error('Error al obtener datos de la base de datos:', error);
+        alert('Error al obtener datos de la base de datos');
     }
 }
 
@@ -336,13 +284,10 @@ document.addEventListener('DOMContentLoaded', () => {
     campos.forEach(campo => {
         campo.addEventListener('blur', () => validarCampo(campo));
     });
-
-    document.getElementById('guardarBtn').addEventListener('click', guardarDatos);
-    document.getElementById('recuperarBtn').addEventListener('click', recuperarDatos);
+    
     document.getElementById('getJsonBtn').addEventListener('click', getJson);
     document.getElementById('postPhpBtn').addEventListener('click', postPhp);
     document.getElementById('getPhpBtn').addEventListener('click', getPhp);
     document.getElementById('postDbBtn').addEventListener('click', postDb);
     document.getElementById('getDbBtn').addEventListener('click', getDb);
 });
-

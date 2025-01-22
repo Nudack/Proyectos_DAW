@@ -1,0 +1,74 @@
+/* Estructura general del cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#juego {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+    margin: 20px 0;
+}
+
+/* Estilo de las torres */
+.torre {
+    width: 300px;
+    height: 300px;
+    background-color: #ddd;
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    border: 2px solid #333;
+}
+
+/* Estilos para los discos */
+.disco {
+    height: 30px;
+    background-size: 100% 100%;  /* Hace que el fondo se ajuste completamente al contenedor */
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 4px 0;
+}
+
+/* Tamaños específicos de cada disco */
+.disco1 {
+    background-image: url('imagenes/hanoi.png');
+    width: 60px;
+}
+
+.disco2 {
+    background-image: url('imagenes/hanoi.png');
+    width: 120px;
+}
+
+.disco3 {
+    background-image: url('imagenes/hanoi.png');
+    width: 180px;
+}
+
+#mensajes {
+    margin-top: 20px;
+    color: #f00;
+    font-weight: bold;
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+}
+
+#info {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 10px;
+}
+
+.seleccionado {
+    border: 2px solid #00f; /* Borde azul para resaltar el disco seleccionado */
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* Sombra para hacer que brille */
+}

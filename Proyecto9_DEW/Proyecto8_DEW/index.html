@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Completo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario Completo</h1>
+        <form id="registroForm">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+                <span class="error-message" id="nombreError"></span>
+            </div>
+            <div class="form-group">
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" required>
+                <span class="error-message" id="apellidosError"></span>
+            </div>
+            <div class="form-group">
+                <label for="dni">DNI/NIE:</label>
+                <input type="text" id="dni" name="dni" required>
+                <span class="error-message" id="dniError"></span>
+            </div>
+            <div class="form-group">
+                <label for="fechaNacimiento">Fecha de Nacimiento:</label>
+                <input type="text" id="fechaNacimiento" name="fechaNacimiento" placeholder="DD/MM/AAAA" required>
+                <span class="error-message" id="fechaNacimientoError"></span>
+            </div>
+            <div class="form-group">
+                <label for="codigoPostal">Código Postal:</label>
+                <input type="text" id="codigoPostal" name="codigoPostal" required>
+                <span class="error-message" id="codigoPostalError"></span>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail:</label>
+                <input type="text" id="email" name="email" required>
+                <span class="error-message" id="emailError"></span>
+            </div>
+            <div class="form-group">
+                <label for="telefonoFijo">Teléfono Fijo:</label>
+                <input type="text" id="telefonoFijo" name="telefonoFijo" required>
+                <span class="error-message" id="telefonoFijoError"></span>
+            </div>
+            <div class="form-group">
+                <label for="telefonoMovil">Teléfono Móvil:</label>
+                <input type="text" id="telefonoMovil" name="telefonoMovil" required>
+                <span class="error-message" id="telefonoMovilError"></span>
+            </div>
+            <div class="form-group">
+                <label for="iban">IBAN:</label>
+                <input type="text" id="iban" name="iban" required>
+                <span class="error-message" id="ibanError"></span>
+            </div>
+            <div class="form-group">
+                <label for="tarjetaCredito">Tarjeta de Crédito:</label>
+                <input type="text" id="tarjetaCredito" name="tarjetaCredito" required>
+                <span class="error-message" id="tarjetaCreditoError"></span>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                <span class="error-message" id="passwordError"></span>
+            </div>
+            <div class="form-group">
+                <label for="repeatPassword">Repetir Contraseña:</label>
+                <input type="password" id="repeatPassword" name="repeatPassword" required>
+                <span class="error-message" id="repeatPasswordError"></span>
+            </div>
+        </form>
+        <div class="button-group">
+            <button type="button" id="getJsonBtn">Obtener desde .json (GET .json)</button>
+            <button type="button" id="postPhpBtn">Publicar en .php (POST)</button>
+            <button type="button" id="getPhpBtn">Obtener desde .php (GET .php)</button>
+            <button type="button" id="postDbBtn">Publicar base de datos (POST + SQL)</button>
+            <button type="button" id="getDbBtn">Obtener base de datos (GET + SQL)</button>
+        </div>
+        <br> 
+            <input type="text" id="dniDB" class="base" placeholder="Buscar DNI">
+    </div>
+    <script src="formulario.js"></script>
+</body>
+</html>

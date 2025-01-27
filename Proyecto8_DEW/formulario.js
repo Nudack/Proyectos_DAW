@@ -76,6 +76,14 @@ const validaciones = {
             return this.regex.test(valor);
         },
         mensaje: "La contraseña debe tener al menos 12 caracteres, una minúscula, una mayúscula, un número y un carácter especial."
+    },
+    repeatPassword: {
+
+        test: function(valor) {
+            const password = document.getElementById("password").value
+            return valor === password
+        },
+        mensaje: "Las contraseñas deben ser iguales"
     }
 };
 
@@ -92,12 +100,16 @@ function validarCampo(campo) {
     if (validacion && validacion.test(valor)) {
         campo.classList.remove('invalid');
         campo.classList.add('valid');
-        errorElement.textContent = '';
+        if(errorElement) {
+            errorElement.textContent = "";
+        }
         return true;
     } else {
         campo.classList.remove('valid');
         campo.classList.add('invalid');
-        errorElement.textContent = validacion ? validacion.mensaje : 'Campo inválido';
+        if(errorElement) {
+            errorElement.textContent = validacion ? validacion.mensaje : "Campo inválido";
+        }
         return false;
     }
 }
@@ -105,31 +117,14 @@ function validarCampo(campo) {
 // Función para validar todos los campos
 function validarFormulario() {
     let esValido = true;
-    const campos = document.querySelectorAll('input');
-    campos.forEach(campo => {
-        if (campo.id !== 'repeatPassword') {
-            if (!validarCampo(campo)) {
-                esValido = false;
-            }
+    for (const campo in validaciones) {
+        const valor = document.getElementById(campo).value
+        if(!validaciones[campo].test(valor)){
+            esValido = false;
+            alert(validaciones[campo].mensaje);
+            break;
         }
-    });
-
-    // Validar que las contraseñas coincidan
-    const password = document.getElementById('password');
-    const repeatPassword = document.getElementById('repeatPassword');
-    const repeatPasswordError = document.getElementById('repeatPasswordError');
-
-    if (password.value !== repeatPassword.value) {
-        repeatPassword.classList.remove('valid');
-        repeatPassword.classList.add('invalid');
-        repeatPasswordError.textContent = 'Las contraseñas no coinciden';
-        esValido = false;
-    } else {
-        repeatPassword.classList.remove('invalid');
-        repeatPassword.classList.add('valid');
-        repeatPasswordError.textContent = '';
     }
-
     return esValido;
 }
 
@@ -162,7 +157,10 @@ function clearFormData() {
     campos.forEach(campo => {
         campo.value = '';
         campo.classList.remove('valid', 'invalid');
-        document.getElementById(`${campo.id}Error`).textContent = '';
+        const errorElement = document.getElementById(`${campo.id}Error`);
+        if(errorElement) {
+            errorElement.textContent = "";
+        }
     });
 }
 
@@ -242,11 +240,14 @@ async function postDb() {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const result = await response.json();
+            if (result.error) {
+                throw new Error(result.error)
+            }
             alert(result.message);
             clearFormData();
         } catch (error) {
             console.error('Error al publicar datos en la base de datos:', error);
-            alert('Error al publicar datos en la base de datos');
+            alert('Error al publicar datos en la base de datos: ' + error.message);
         }
     } else {
         alert('Por favor, corrige los errores en el formulario antes de enviar');

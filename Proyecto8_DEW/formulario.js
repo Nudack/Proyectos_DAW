@@ -78,7 +78,6 @@ const validaciones = {
         mensaje: "La contraseña debe tener al menos 12 caracteres, una minúscula, una mayúscula, un número y un carácter especial."
     },
     repeatPassword: {
-
         test: function(valor) {
             const password = document.getElementById("password").value
             return valor === password
@@ -86,9 +85,6 @@ const validaciones = {
         mensaje: "Las contraseñas deben ser iguales"
     }
 };
-
-// Objeto para almacenar los datos del formulario
-let datosFormulario = {};
 
 // Función para validar un campo
 function validarCampo(campo) {

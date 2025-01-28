@@ -1,19 +1,41 @@
 <?php
-    header("Content-Type: application/json");
-    header("Access-Control-Allow-Origin: *");
+error_reporting(E_ALL);
+ini_set('display_errors', 0);
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "usuarios";
+header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: *");
 
+// Function to handle errors and return them as JSON
+function handleError($errno, $errstr, $errfile, $errline) {
+    $error = array(
+        'error' => $errstr,
+        'file' => $errfile,
+        'line' => $errline
+    );
+    echo json_encode($error);
+    exit;
+}
+
+// Set the error handler
+set_error_handler("handleError");
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "gestion";
+
+try {
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
-        die(json_encode(["error" => "Conexión fallida: " . $conn->connect_error]));
+        throw new Exception("Conexión fallida: " . $conn->connect_error);
     }
 
-    $dni = $_GET['dni'];
+    $dni = isset($_GET['dni']) ? $_GET['dni'] : '';
+
+    if (empty($dni)) {
+        throw new Exception("DNI no proporcionado");
+    }
 
     $sql = "SELECT * FROM usuarios WHERE dni = ?";
     $stmt = $conn->prepare($sql);
@@ -31,3 +53,7 @@
 
     $stmt->close();
     $conn->close();
+} catch (Exception $e) {
+    echo json_encode(["error" => $e->getMessage()]);
+}
+

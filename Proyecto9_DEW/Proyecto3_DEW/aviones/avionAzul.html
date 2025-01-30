@@ -5,17 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../StyleSheet.css">
     <title>Avión Azul</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>Reserva de Asientos - Avión Azul</h1>
-
-    <!-- Selección de categoría -->
-    <label for="categoria">Selecciona tu categoría:</label>
-    <select id="categoria" onchange="mostrarAsientos()">
-        <option value="business">Business</option>
-        <option value="economica">Económica</option>
-        <option value="lowCost">Low-Cost</option>
-    </select>
 
     <!-- Tabla de asientos -->
     <div id="tablaAsientos"></div>

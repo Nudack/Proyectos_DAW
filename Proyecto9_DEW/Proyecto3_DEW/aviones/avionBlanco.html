@@ -5,36 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../StyleSheet.css">
     <title>Avión Blanco</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>Reserva de Asientos - Avión Blanco</h1>
 
-    <!-- Selección de categoría -->
-    <label for="categoria">Selecciona tu categoría:</label>
-    <select id="categoria" onchange="mostrarAsientos()">
-        <option value="business">Business</option>
-        <option value="economica">Económica</option>
-        <option value="lowCost">Low-Cost</option>
-    </select>
-
-    <!-- Tabla de asientos -->
     <div id="tablaAsientos"></div>
 
-    <!-- Complementos (que se mostrarán dinámicamente según la categoría seleccionada) -->
-    <div id="complementos">
-        <!-- Estos complementos serán generados dinámicamente -->
-    </div>
+    <div id="complementos"></div>
 
-    <!-- Selección de si es residente -->
     <div>
-        <input type="checkbox" id="residente" onchange="actualizarPrecio()">
+        <input type="checkbox" id="residente">
         <label for="residente">¿Eres residente? (75% de descuento)</label>
     </div>
 
-    <!-- Mostrar el precio total -->
     <div id="precioTotal">Precio total: 0€</div>
 
     <script src="../Script.js"></script>
 </body>
 </html>
+
+
 

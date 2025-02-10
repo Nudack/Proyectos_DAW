@@ -1,0 +1,13 @@
+<div class="gif-grid">
+    <div *ngFor="let gif of gifs; let i = index" class="gif-card animate__animated animate__fadeIn">
+      <div class="gif-number">{{i + 1}}</div>
+      <div class="gif-image-container">
+        <img [src]="gif.images.downsized_medium.url" [alt]="gif.title" class="gif-image">
+      </div>
+      <div class="gif-info">
+        <h3 class="gif-title">{{truncateText(gif.title, 70)}}</h3>
+        <p class="gif-description">{{truncateText(gif.user?.description || 'No description available', 150)}}</p>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,67 @@
+ 
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background-image: url("/assets/images/bg-desktop-light.jpg");
+    background-size: cover;
+    z-index: -1;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #9966ff 0%, #0066ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .btn-outline-primary {
+    border-color: #9966ff;
+    color: #9966ff;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #9966ff;
+    color: white;
+  }
+  
+  .todo-container {
+    max-width: 540px;
+  }
+  
+  .todo-header h1 {
+    letter-spacing: 0.8rem;
+    font-size: 2.5rem;
+  }
+  :host-context(body.dark) .background-image {
+    background-image: url("/assets/images/bg-desktop-dark.jpg");
+  }
+  
+  
+  :host-context(body.dark) .moon-icon,
+  .sun-icon {
+    display: none;
+  }
+  
+  :host-context(body.dark) .sun-icon,
+  .moon-icon {
+    display: block;
+  }
+  
+  @media (max-width: 375px) {
+    .background-image {
+      background-image: url("/assets/images/bg-mobile-light.jpg");
+    }
+  
+    :host-context(body.dark) .background-image {
+      background-image: url("/assets/images/bg-mobile-dark.jpg");
+    }
+
+  
+    :host-context(body.dark) .todo-filters {
+      background: var(--very-dark-desaturated-blue);
+    }
+  }
+  

@@ -1,0 +1,33 @@
+<div class="row p-3">
+
+    <div class="app-container min-vh-100 py-5">
+        <div class="background-image"></div>
+        
+        <main class="todo-container container">
+          <header class="todo-header d-flex justify-content-between align-items-center p-2 mb-4">
+            <h1 class="text-white text-uppercase">TODO</h1>
+            <button class="btn p-0" aria-label="Toggle theme" (click)="toggleTheme()">
+              <img src="assets/images/icon-moon.svg" alt="" class="moon-icon">
+              <img src="assets/images/icon-sun.svg" alt="" class="sun-icon">
+            </button>
+          </header>
+      
+          <div class="p-2 mb-4">
+            <gifs-search-box></gifs-search-box>
+          </div>
+      
+          <div class="todo-list-container bg-white rounded overflow-hidden shadow">
+            
+          </div>
+      
+          <p class="drag-drop-text text-center text-muted mt-4 small"></p>
+        </main>
+        
+          <!-- Listado de Gifs -->
+      <gifs-card-list [gifs]="gifs"></gifs-card-list>
+      </div>
+    
+    
+      
+      
+</div>

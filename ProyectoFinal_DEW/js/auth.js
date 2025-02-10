@@ -1,6 +1,16 @@
-const $ = JQuery
+// Asegúrate de que jQuery esté disponible antes de usarlo
+if (typeof jQuery === "undefined") {
+  console.error("jQuery no está cargado. Verifica la inclusión de la biblioteca.")
+}
+// Usa jQuery de manera segura
+;(($) => {
+  // The jQuery variable is now correctly passed as an argument to the function.
+  if (typeof $ === "undefined") {
+    console.error("jQuery no está disponible en este contexto.")
+    return
+  }
 
-$(document).ready(() => {
+  $(document).ready(() => {
     // Manejo del formulario de inicio de sesión
     $("#login-form").submit(function (e) {
       e.preventDefault()
@@ -20,7 +30,7 @@ $(document).ready(() => {
         },
       })
     })
-  
+
     // Manejo del formulario de registro
     $("#registro-form").submit(function (e) {
       e.preventDefault()
@@ -40,7 +50,7 @@ $(document).ready(() => {
         },
       })
     })
-  
+
     // Validación del formulario con expresiones regulares
     const validations = {
       id: /^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i,
@@ -50,7 +60,7 @@ $(document).ready(() => {
       telefono: /^[0-9]{9}$/,
       password: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/, // Al menos 8 caracteres, una letra y un número
     }
-  
+
     $("#registro-form input").on("input", function () {
       const field = $(this).attr("id")
       const value = $(this).val()
@@ -61,6 +71,5 @@ $(document).ready(() => {
       }
     })
   })
-  
-  
+})(jQuery)
 

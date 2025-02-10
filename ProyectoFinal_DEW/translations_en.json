@@ -1,0 +1,27 @@
+{
+    "home": "Home",
+    "products": "Products",
+    "about": "About",
+    "login": "Log in",
+    "register": "Sign up",
+    "cart": "Cart",
+    "price": "Price",
+    "category": "Category",
+    "availability": "Availability",
+    "addToCart": "Add to cart",
+    "errorLoadingProducts": "Error loading products.",
+    "yourCart": "Your Cart",
+    "remove": "Remove",
+    "total": "Total",
+    "purchaseSuccess": "Purchase completed successfully",
+    "purchaseError": "Error completing the purchase",
+    "finalizePurchase": "Finalize Purchase",
+    "Sedán": "Sedan",
+    "SUV": "SUV",
+    "Deportivo": "Sports",
+    "Eléctrico": "Electric",
+    "Híbrido": "Hybrid",
+    "featuredProducts": "Featured Products"
+  }
+  
+  

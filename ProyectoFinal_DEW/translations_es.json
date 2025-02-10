@@ -1,0 +1,27 @@
+{
+    "home": "Inicio",
+    "products": "Productos",
+    "about": "Acerca de",
+    "login": "Iniciar sesión",
+    "register": "Registrarse",
+    "cart": "Carrito",
+    "price": "Precio",
+    "category": "Categoría",
+    "availability": "Disponibilidad",
+    "addToCart": "Añadir al carrito",
+    "errorLoadingProducts": "Error al cargar los productos.",
+    "yourCart": "Tu Carrito",
+    "remove": "Eliminar",
+    "total": "Total",
+    "purchaseSuccess": "Compra realizada con éxito",
+    "purchaseError": "Error al realizar la compra",
+    "finalizePurchase": "Finalizar Compra",
+    "Sedán": "Sedán",
+    "SUV": "SUV",
+    "Deportivo": "Deportivo",
+    "Eléctrico": "Eléctrico",
+    "Híbrido": "Híbrido",
+    "featuredProducts": "Productos Destacados"
+  }
+  
+  

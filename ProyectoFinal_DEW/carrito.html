@@ -12,15 +12,15 @@
     <header>
         <nav>
             <div class="logo">
-                <a href="index.html"><img src="/placeholder.svg?height=50&width=100" alt="AutoDB Logo"></a>
+                <a href="index.html"><img src="imagenes/logo.png" alt="AutoDB Logo" height="50"></a>
             </div>
             <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="categoria.html">Productos</a></li>
-                <li><a href="acerca-de.html">Acerca de</a></li>
-                <li><a href="auth/login.html">Iniciar sesión</a></li>
-                <li><a href="auth/signup.html">Registrarse</a></li>
-                <li><a href="carrito.html">Carrito</a></li>
+                <li><a href="index.html" data-translate="home">Inicio</a></li>
+                <li><a href="categoria.html" data-translate="products">Productos</a></li>
+                <li><a href="acerca-de.html" data-translate="about">Acerca de</a></li>
+                <li><a href="auth/login.html" data-translate="login">Iniciar sesión</a></li>
+                <li><a href="auth/signup.html" data-translate="register">Registrarse</a></li>
+                <li><a href="carrito.html" data-translate="cart">Carrito</a></li>
                 <li>
                     <select id="idioma">
                         <option value="es">Español</option>
@@ -32,17 +32,17 @@
     </header>
 
     <main>
-        <h1>Tu Carrito</h1>
+        <h1 data-translate="yourCart">Tu Carrito</h1>
         <div id="carrito-contenido">
             <!-- El contenido del carrito se cargará dinámicamente aquí -->
         </div>
-        <button id="finalizar-compra">Finalizar Compra</button>
+        <button id="finalizar-compra" data-translate="finalizePurchase">Finalizar Compra</button>
     </main>
 
     <footer>
-        <p>&copy; 2025 AutoDB. Todos los derechos reservados.</p>
-        <p>Dirección: Calle Automóvil, 123, Ciudad Motor</p>
-        <p>Email: info@autodb.com | Teléfono: +34 123 456 789</p>
+        <p>&copy; 2025 AutoDB. <span data-translate="allRightsReserved">Todos los derechos reservados.</span></p>
+        <p><span data-translate="address">Dirección</span>: Calle Automóvil, 123, Ciudad Motor</p>
+        <p>Email: info@autodb.com | <span data-translate="phone">Teléfono</span>: +34 123 456 789</p>
     </footer>
 </body>
 </html>

@@ -1,0 +1,16 @@
+<aside class="sidebar">
+    <h2 class="sidebar-title">Resultados</h2>
+    <nav>
+      <div class="d-grid gap-3">
+        <button 
+          *ngFor="let category of categories" 
+          (click)="searchCategory(category)"
+          class="nav-button"
+        >
+          {{category | titlecase}}
+        </button>
+      </div>
+    </nav>
+  </aside>
+  
+  

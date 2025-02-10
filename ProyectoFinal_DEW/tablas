@@ -30,11 +30,24 @@ CREATE TABLE carrito (
     FOREIGN KEY (producto_id) REFERENCES productos(id)
 );
 
--- Insertar algunos productos de ejemplo
-INSERT INTO productos (nombre, descripcion, precio, imagen, categoria, disponibilidad) VALUES 
-('Sedán Lujo 2025', 'Un sedán de lujo con todas las comodidades', 45000.00, '/images/sedan_lujo.jpg', 'Sedán', 'Disponible'),
-('SUV Familiar', 'SUV espacioso ideal para familias', 38000.00, '/images/suv_familiar.jpg', 'SUV', 'Disponible'),
-('Deportivo Veloz', 'Coche deportivo de alto rendimiento', 65000.00, '/images/deportivo_veloz.jpg', 'Deportivo', 'Próximamente'),
-('Eléctrico Eco', 'Vehículo 100% eléctrico y ecológico', 42000.00, '/images/electrico_eco.jpg', 'Eléctrico', 'Disponible'),
-('Híbrido Eficiente', 'Combina motor de gasolina y eléctrico para máxima eficiencia', 39000.00, '/images/hibrido_eficiente.jpg', 'Híbrido', 'Disponible');
+-- Insertar productos de ejemplo
+INSERT INTO productos (nombre, descripcion, precio, imagen, categoria, disponibilidad) VALUES
+('Toyota Corolla', 'Sedán compacto confiable', 22000.00, 'corolla.jpg', 'Sedán', 'Disponible'),
+('Honda CR-V', 'SUV espaciosa y eficiente', 32000.00, 'crv.jpg', 'SUV', 'Disponible'),
+('Ford Mustang', 'Deportivo icónico con gran potencia', 45000.00, 'mustang.jpg', 'Deportivo', 'Agotado'),
+('Tesla Model 3', 'Eléctrico con autonomía avanzada', 50000.00, 'model3.jpg', 'Eléctrico', 'Disponible'),
+('Toyota Prius', 'Híbrido con excelente eficiencia de combustible', 28000.00, 'prius.jpg', 'Híbrido', 'Próximamente');
 
+-- Insertar clientes de ejemplo
+INSERT INTO clientes (id, nombre, email, password, cuenta_bancaria, telefono) VALUES
+('12345678A', 'Juan Pérez', 'juan.perez@example.com', 'hashed_password1', 'ES9121000418450200051332', '600123456'),
+('87654321B', 'Ana Gómez', 'ana.gomez@example.com', 'hashed_password2', 'ES2421000418450200067890', '601987654'),
+('11223344C', 'Carlos López', 'carlos.lopez@example.com', 'hashed_password3', NULL, '602345678'),
+('44332211D', 'Laura Fernández', 'laura.fernandez@example.com', 'hashed_password4', 'ES7921000418450200098765', '603567890');
+
+-- Insertar productos en el carrito de ejemplo
+INSERT INTO carrito (cliente_id, producto_id, cantidad) VALUES
+('12345678A', 1, 1),  
+('87654321B', 2, 2),  
+('11223344C', 4, 1),  
+('44332211D', 3, 1);  

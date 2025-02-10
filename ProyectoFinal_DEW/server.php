@@ -25,6 +25,22 @@ function getProducts($category = null) {
     $products = [];
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
+            $row['imagen'] = basename($row['imagen']);
+            $products[] = $row;
+        }
+    }
+    return json_encode($products);
+}
+
+// Añade esta nueva función después de la función getProducts
+function getFeaturedProducts() {
+    global $conn;
+    $sql = "SELECT * FROM productos LIMIT 5";
+    $result = $conn->query($sql);
+    $products = [];
+    if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+            $row['imagen'] = basename($row['imagen']);
             $products[] = $row;
         }
     }
@@ -71,6 +87,34 @@ function loginUser($data) {
     return json_encode(['success' => false, 'message' => 'ID o contraseña incorrectos']);
 }
 
+// Función para finalizar la compra
+function finalizePurchase($cartData) {
+    global $conn;
+    $cart = json_decode($cartData, true);
+    
+    // Aquí deberías implementar la lógica para procesar la compra
+    // Por ejemplo, actualizar el inventario, crear un registro de la orden, etc.
+    
+    // Este es un ejemplo simplificado
+    $success = true;
+    $message = "Compra finalizada con éxito";
+    
+    // Simular una actualización de inventario
+    foreach ($cart as $item) {
+        $productId = $conn->real_escape_string($item['id']);
+        $quantity = $conn->real_escape_string($item['quantity']);
+        
+        $sql = "UPDATE productos SET stock = stock - $quantity WHERE id = '$productId'";
+        if (!$conn->query($sql)) {
+            $success = false;
+            $message = "Error al actualizar el inventario: " . $conn->error;
+            break;
+        }
+    }
+    
+    return json_encode(['success' => $success, 'message' => $message]);
+}
+
 // Manejo de peticiones
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET['action'])) {
@@ -78,6 +122,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             case 'getProducts':
                 $category = isset($_GET['category']) ? $_GET['category'] : null;
                 echo getProducts($category);
+                break;
+            case 'getFeaturedProducts':
+                echo getFeaturedProducts();
                 break;
             default:
                 echo json_encode(['success' => false, 'message' => 'Acción no reconocida']);
@@ -91,6 +138,9 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 break;
             case 'login':
                 echo loginUser($_POST);
+                break;
+            case 'finalizePurchase':
+                echo finalizePurchase($_POST['cart']);
                 break;
             default:
                 echo json_encode(['success' => false, 'message' => 'Acción no reconocida']);

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse - AutoDB</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/auth.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="../index.html"><img src="/placeholder.svg?height=50&width=100" alt="AutoDB Logo"></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <h2>Registrarse</h2>
+            <form id="registro-form" class="auth-form">
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                <input type="text" id="id" name="id" placeholder="DNI" required>
+                <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+                <input type="password" id="password" name="password" placeholder="Contraseña" required>
+                <input type="text" id="cuenta-bancaria" name="cuenta-bancaria" placeholder="Cuenta bancaria" required>
+                <input type="tel" id="telefono" name="telefono" placeholder="Número de teléfono" required>
+                <button type="submit">Registrarse</button>
+            </form>
+            <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión aquí</a></p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AutoDB. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
+

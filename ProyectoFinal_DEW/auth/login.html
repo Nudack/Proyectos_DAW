@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - AutoDB</title>
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/auth.js" defer></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="../index.html"><img src="/placeholder.svg?height=50&width=100" alt="AutoDB Logo"></a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="auth-container">
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form" class="auth-form">
+                <input type="text" id="login-id" name="id" placeholder="ID" required>
+                <input type="password" id="login-password" name="password" placeholder="Contraseña" required>
+                <button type="submit">Iniciar sesión</button>
+            </form>
+            <p>¿No tienes una cuenta? <a href="signup.html">Regístrate aquí</a></p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 AutoDB. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
+
+

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoDB - Base de Datos de Coches</title>
+    <title>Carrito - AutoDB</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="js/script.js" defer></script>
@@ -12,7 +12,7 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="/placeholder.svg?height=50&width=100" alt="AutoDB Logo">
+                <a href="index.html"><img src="/placeholder.svg?height=50&width=100" alt="AutoDB Logo"></a>
             </div>
             <ul>
                 <li><a href="index.html">Inicio</a></li>
@@ -31,14 +31,13 @@
         </nav>
     </header>
 
-    <main id="contenido-principal">
-        <h1>Bienvenido a AutoDB</h1>
-        <p>Explora nuestra amplia selección de vehículos de alta calidad.</p>
+    <main>
+        <h1>Tu Carrito</h1>
+        <div id="carrito-contenido">
+            <!-- El contenido del carrito se cargará dinámicamente aquí -->
+        </div>
+        <button id="finalizar-compra">Finalizar Compra</button>
     </main>
-
-    <section id="productos-destacados">
-        <!-- Aquí se cargarán los productos destacados -->
-    </section>
 
     <footer>
         <p>&copy; 2025 AutoDB. Todos los derechos reservados.</p>

@@ -1,0 +1,40 @@
+CREATE DATABASE IF NOT EXISTS autodb;
+USE autodb;
+
+CREATE TABLE productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    precio DECIMAL(10, 2) NOT NULL,
+    imagen VARCHAR(255),
+    categoria ENUM('Sedán', 'SUV', 'Deportivo', 'Eléctrico', 'Híbrido') NOT NULL,
+    disponibilidad ENUM('Disponible', 'Agotado', 'Próximamente') DEFAULT 'Disponible'
+);
+
+CREATE TABLE clientes (
+    id VARCHAR(9) PRIMARY KEY,  -- DNI como ID
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    cuenta_bancaria VARCHAR(20),
+    telefono VARCHAR(15)
+);
+
+CREATE TABLE carrito (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id VARCHAR(9),
+    producto_id INT,
+    cantidad INT NOT NULL,
+    fecha_agregado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (cliente_id) REFERENCES clientes(id),
+    FOREIGN KEY (producto_id) REFERENCES productos(id)
+);
+
+-- Insertar algunos productos de ejemplo
+INSERT INTO productos (nombre, descripcion, precio, imagen, categoria, disponibilidad) VALUES 
+('Sedán Lujo 2025', 'Un sedán de lujo con todas las comodidades', 45000.00, '/images/sedan_lujo.jpg', 'Sedán', 'Disponible'),
+('SUV Familiar', 'SUV espacioso ideal para familias', 38000.00, '/images/suv_familiar.jpg', 'SUV', 'Disponible'),
+('Deportivo Veloz', 'Coche deportivo de alto rendimiento', 65000.00, '/images/deportivo_veloz.jpg', 'Deportivo', 'Próximamente'),
+('Eléctrico Eco', 'Vehículo 100% eléctrico y ecológico', 42000.00, '/images/electrico_eco.jpg', 'Eléctrico', 'Disponible'),
+('Híbrido Eficiente', 'Combina motor de gasolina y eléctrico para máxima eficiencia', 39000.00, '/images/hibrido_eficiente.jpg', 'Híbrido', 'Disponible');
+

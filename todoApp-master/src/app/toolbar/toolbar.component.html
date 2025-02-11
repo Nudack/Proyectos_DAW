@@ -1,0 +1,10 @@
+<nav class="toolbar">
+    <button (click)="setView('calculadora')" [class.active]="currentView === 'calculadora'">Calculadora</button>
+    <button (click)="setView('gifsapp')" [class.active]="currentView === 'gifsapp'">GIFsApp</button>
+  </nav>
+  <div class="content">
+    <app-calculadora *ngIf="currentView === 'calculadora'"></app-calculadora>
+    <app-gifsapp *ngIf="currentView === 'gifsapp'"></app-gifsapp>
+  </div>
+  
+  

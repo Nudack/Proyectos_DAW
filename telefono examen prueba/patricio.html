@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teclado Telefónico</title>
+    <link rel="stylesheet" href="patricio.css">
+</head>
+<body>
+    <!-- Contenedor principal del teléfono -->
+    <div class="telefono">
+        <!-- Pantalla donde se mostrarán los números ingresados -->
+        <input type="text" id="pantalla" readonly>
+        
+        <!-- Contenedor del teclado -->
+        <div class="teclado">
+            <!-- Botones del teclado numérico -->
+            <button class="tecla" data-valor="1">1</button>
+            <button class="tecla" data-valor="2">2 ABC</button>
+            <button class="tecla" data-valor="3">3 DEF</button>
+            <button class="tecla" data-valor="4">4 GHI</button>
+            <button class="tecla" data-valor="5">5 JKL</button>
+            <button class="tecla" data-valor="6">6 MNO</button>
+            <button class="tecla" data-valor="7">7 PQRS</button>
+            <button class="tecla" data-valor="8">8 TUV</button>
+            <button class="tecla" data-valor="9">9 WXYZ</button>
+            <button class="tecla" data-valor="#">#</button>
+            <button class="tecla" data-valor="0">0</button>
+            <!-- Botón para borrar la pantalla -->
+            <button class="tecla" data-valor="borrar">🟥</button>
+            <!-- Botón para realizar la llamada -->
+            <button class="tecla llamar" data-valor="llamar">📞</button>
+        </div>
+    </div>
+    
+    <!-- Inclusión del archivo JavaScript para la funcionalidad -->
+    <script src="patricio.js"></script>
+</body>
+</html>

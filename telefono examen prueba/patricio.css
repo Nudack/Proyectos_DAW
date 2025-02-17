@@ -1,0 +1,54 @@
+/* Estilos generales para el teléfono */
+.telefono {
+    width: 250px;
+    margin: 20px auto;
+    padding: 10px;
+    border: 2px solid #000;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+/* Estilo de la pantalla del teléfono */
+#pantalla {
+    width: 90%;
+    height: 40px;
+    font-size: 20px;
+    text-align: right;
+    margin-bottom: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+/* Contenedor del teclado */
+.teclado {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+}
+
+/* Estilos generales de los botones */
+.tecla {
+    width: 60px;
+    height: 60px;
+    font-size: 18px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.tecla:hover {
+    background-color: #ddd;
+}
+
+/* Estilos específicos para los botones de acción */
+.tecla[data-valor="borrar"] {
+    background-color: red;
+    color: white;
+}
+
+.tecla.llamar {
+    background-color: green;
+    color: white;
+}
